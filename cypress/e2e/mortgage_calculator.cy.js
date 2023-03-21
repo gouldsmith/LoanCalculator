@@ -12,7 +12,7 @@ describe("Interest Rate Tests", () => {
     ).as("get30FixedRate");
     cy.visit("/mortgage-calculator/");
   });
-  it.only("interest rate field interaction", () => {
+  it("Interest rate field interaction", () => {
     cy.wait("@get30FixedRate");
     cy.get(mortgageFields.interestRate).should("contain.value", "6.425");
 
@@ -27,7 +27,7 @@ describe("Interest Rate Tests", () => {
     cy.contains("Your payment: $1,702/mo");
   });
 
-  it("loan program selection changes interest rate", () => {
+  it("Loan program selection changes interest rate", () => {
     // default 30 year fixed
     cy.wait("@get30FixedRate");
     cy.get(mortgageFields.loanProgram).should("contain.text", "30 year fixed");
@@ -53,7 +53,7 @@ describe("Interest Rate Tests", () => {
     });
     cy.findByDisplayValue("5.82").should("exist");
   });
-  it("user input boundaries on interest rate field", () => {
+  it("User input boundaries on interest rate field", () => {
     cy.get(mortgageFields.interestRate).clear().type("hello").blur();
     cy.findAllByText(/is not a valid number/i).should("exist");
 
@@ -73,5 +73,21 @@ describe("Interest Rate Tests", () => {
 
     cy.get(mortgageFields.interestRate).clear().type("&^#@!").blur();
     cy.findAllByText(/is not a valid number/i).should("exist");
+  });
+
+  const sizes = ["iphone-se2", "iphone-xr", "samsung-s10", "ipad-mini"];
+  describe("Mobile Tests", () => {
+    sizes.forEach((size) => {
+      it(`Interest rate field is visible on a ${size} viewport`, () => {
+        if (Cypress._.isArray(size)) {
+          cy.viewport(size[0], size[1]);
+        } else {
+          cy.viewport(size);
+        }
+
+        cy.visit("/mortgage-calculator/");
+        cy.get(mortgageFields.interestRate);
+      });
+    });
   });
 });
