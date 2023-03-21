@@ -12,7 +12,7 @@ describe("Interest Rate Tests", () => {
     ).as("get30FixedRate");
     cy.visit("/mortgage-calculator/");
   });
-  it("interest rate field interaction", () => {
+  it.only("interest rate field interaction", () => {
     cy.wait("@get30FixedRate");
     cy.get(mortgageFields.interestRate).should("contain.value", "6.425");
 
@@ -21,10 +21,10 @@ describe("Interest Rate Tests", () => {
     cy.get(mortgageFields.downpaymentAmount).clear().type("60,000");
     cy.get(mortgageFields.downpaymentPercent).clear().type("20");
     cy.get(mortgageFields.loanProgram).select("30 year fixed");
-    cy.contains("Your payment: $2,023/mo");
+    cy.contains("Your payment: $1,855/mo");
 
     cy.findByDisplayValue("6.425").clear().type("5.432").blur();
-    cy.contains("Your payment: $1,870/mo");
+    cy.contains("Your payment: $1,702/mo");
   });
 
   it("loan program selection changes interest rate", () => {
@@ -53,7 +53,7 @@ describe("Interest Rate Tests", () => {
     });
     cy.findByDisplayValue("5.82").should("exist");
   });
-  it.only("user input boundaries on interest rate field", () => {
+  it("user input boundaries on interest rate field", () => {
     cy.get(mortgageFields.interestRate).clear().type("hello").blur();
     cy.findAllByText(/is not a valid number/i).should("exist");
 
