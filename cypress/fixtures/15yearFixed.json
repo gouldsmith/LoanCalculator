@@ -1,1 +1,16 @@
-{"rates":{"rateQuery":{"apr":5.709,"query":{"creditScoreBucket":"High","loanAmountBucket":"Conforming","loanToValueBucket":"Normal","loanType":"Conventional","program":"Fixed15Year"},"rate":5.502,"volume":0}}}
+{
+  "rates": {
+    "rateQuery": {
+      "apr": 5.709,
+      "query": {
+        "creditScoreBucket": "High",
+        "loanAmountBucket": "Conforming",
+        "loanToValueBucket": "Normal",
+        "loanType": "Conventional",
+        "program": "Fixed15Year"
+      },
+      "rate": 5.502,
+      "volume": 0
+    }
+  }
+}

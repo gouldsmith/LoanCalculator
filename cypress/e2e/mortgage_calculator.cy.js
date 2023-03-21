@@ -53,4 +53,25 @@ describe("Interest Rate Tests", () => {
     });
     cy.findByDisplayValue("5.82").should("exist");
   });
+  it.only("user input boundaries on interest rate field", () => {
+    cy.get(mortgageFields.interestRate).clear().type("hello").blur();
+    cy.findAllByText(/is not a valid number/i).should("exist");
+
+    cy.get(mortgageFields.interestRate).clear().type("   ").blur();
+    cy.findAllByText(/is not a valid number/i).should("exist");
+
+    cy.get(mortgageFields.interestRate).clear().type("101").blur();
+    cy.findAllByText(/Rate must be less than or equal to 100/i).should("exist");
+
+    cy.get(mortgageFields.interestRate).clear().type("-1").blur();
+    cy.findAllByText(/Rate must be greater than or equal to 0/i).should(
+      "exist"
+    );
+
+    cy.get(mortgageFields.interestRate).clear().type("6..543").blur();
+    cy.findAllByText(/is not a valid number/i).should("exist");
+
+    cy.get(mortgageFields.interestRate).clear().type("&^#@!").blur();
+    cy.findAllByText(/is not a valid number/i).should("exist");
+  });
 });
