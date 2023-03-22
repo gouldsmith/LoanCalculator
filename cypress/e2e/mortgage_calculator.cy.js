@@ -8,7 +8,7 @@ describe("Interest Rate Tests", () => {
       {
         url: /^https:\/\/mortgageapi\.zillow\.com\/getCurrentRates\?[^#]*program=Fixed30Year/,
       },
-      { fixture: "30YearFixed.json" }
+      { fixture: "rates30YearFixed.json" }
     ).as("get30FixedRate");
     cy.visit("/mortgage-calculator/");
   });
@@ -35,7 +35,7 @@ describe("Interest Rate Tests", () => {
 
     // 15 year
     cy.intercept("GET", "https://mortgageapi.zillow.com/**", {
-      fixture: "15yearFixed.json",
+      fixture: "rates15yearFixed.json",
     }).as("getCurrentRate");
     cy.get(mortgageFields.loanProgram).select("15 year fixed");
     cy.wait("@getCurrentRate").should(({ request }) => {
@@ -45,7 +45,7 @@ describe("Interest Rate Tests", () => {
 
     // 5 year ARM
     cy.intercept("GET", "https://mortgageapi.zillow.com/**", {
-      fixture: "5YearARM.json",
+      fixture: "rates5YearARM.json",
     }).as("getCurrentRate");
     cy.get(mortgageFields.loanProgram).select("5-year ARM");
     cy.wait("@getCurrentRate").should(({ request }) => {
@@ -86,7 +86,8 @@ describe("Interest Rate Tests", () => {
         }
 
         cy.visit("/mortgage-calculator/");
-        cy.get(mortgageFields.interestRate);
+        cy.get(mortgageFields.interestRate).should("be.visible");
+        cy.findAllByLabelText(/interest rate/i).should("be.visible");
       });
     });
   });
