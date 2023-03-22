@@ -18,7 +18,7 @@ To run the test suite with the cypress test runner, run one of the following com
 
     npm test
 
-# Guthub Actions
+# Github Actions
 
 Tests are set to run automatically when pushing code to the repo
 
