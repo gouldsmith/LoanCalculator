@@ -12,6 +12,7 @@ module.exports = defineConfig({
       "*.collector-pxhyx10rg3.px-cloud.net",
       "*.doubleclick.net",
       "*.clicktale.net",
-    ]
+    ],
   },
+  video: false,
 });
