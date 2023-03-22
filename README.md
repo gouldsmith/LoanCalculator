@@ -18,6 +18,10 @@ To run the test suite with the cypress test runner, run one of the following com
 
     npm test
 
+# Guthub Actions
+
+Tests are set to run automatically when pushing code to the repo
+
 ## Automation Notes
 
 The tests are currently running succesfully, but could face a number of potential issues:
@@ -32,6 +36,5 @@ If this test suite were to be expanded, here are my recommendations:
 - Add some e2e tests covering more of the mortgage calculator
 - Automate the negitive tests to include non-happy path test coverage
 - Add navigation and calculator cypress custom commands
-- Setup github action to run this in CI
 
 MIT © [David Gouldsmith]()
