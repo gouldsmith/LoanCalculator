@@ -88,8 +88,11 @@ describe("Interest Rate Tests", () => {
         }
 
         cy.visit("/mortgage-calculator/");
-        cy.get(mortgageFields.interestRate).should("be.visible");
+        cy.get(mortgageFields.interestRate)
+          .scrollIntoView()
+          .should("be.visible");
         cy.findAllByLabelText(/interest rate/i).should("be.visible");
+        cy.get(mortgageFields.interestRate).next().should("have.text", "%");
       });
     });
   });
