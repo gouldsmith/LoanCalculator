@@ -12,6 +12,7 @@ describe("Interest Rate Tests", () => {
     ).as("get30FixedRate");
     cy.visit("/mortgage-calculator/");
   });
+
   it("Interest rate field interaction", () => {
     cy.wait("@get30FixedRate");
     cy.get(mortgageFields.interestRate).should("contain.value", "6.425");
@@ -53,6 +54,7 @@ describe("Interest Rate Tests", () => {
     });
     cy.findByDisplayValue("5.82").should("exist");
   });
+
   it("User input boundaries on interest rate field", () => {
     cy.get(mortgageFields.interestRate).clear().type("hello").blur();
     cy.findAllByText(/is not a valid number/i).should("exist");
