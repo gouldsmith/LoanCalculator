@@ -1,0 +1,22 @@
+{
+  "location": {
+    "cityName": "Ashburn",
+    "cityRegionId": 16818,
+    "countyName": "Loudoun County",
+    "countyRegionId": 1887,
+    "displayName": "20148",
+    "latitude": 38.992166,
+    "longitude": -77.530802,
+    "metroName": "Washington-Arlington-Alexandria",
+    "metroRegionId": 395209,
+    "name": "20148",
+    "regionId": 66243,
+    "stateAbbreviation": "VA",
+    "stateName": "Virginia",
+    "stateRegionId": 56,
+    "type": "ZIPCode",
+    "zipCode": "20148",
+    "zipCodeRegionId": 66243
+  },
+  "supportsMortgage": true
+}

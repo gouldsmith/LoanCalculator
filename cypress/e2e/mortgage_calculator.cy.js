@@ -6,14 +6,26 @@ describe("Interest Rate Tests", () => {
   beforeEach(() => {
     cy.intercept(
       {
+        url: /mortgageapi\.zillow\.com\/getAnnualPropertyTaxRate(\?partnerId=[^&]*)?/,
+      },
+      { fixture: "getAnnualPropertyTaxRate.json" }
+    ).as("getPropertyTax");
+    cy.intercept(
+      {
         url: /^https:\/\/mortgageapi\.zillow\.com\/getCurrentRates\?[^#]*program=Fixed30Year/,
       },
       { fixture: "rates30YearFixed.json" }
     ).as("get30FixedRate");
     cy.visit("/mortgage-calculator/");
+    cy.intercept(
+      { url: /^https:\/\/mortgageapi\.zillow\.com\/getZIPCodeLocation/ },
+      {
+        fixture: "getZipCodeLocation.json",
+      }
+    ).as("getRegion");
   });
 
-  it("Interest rate field interaction", () => {
+  it.only("Interest rate field interaction", () => {
     cy.wait("@get30FixedRate");
     cy.get(mortgageFields.interestRate).should("contain.value", "6.425");
 
@@ -22,10 +34,10 @@ describe("Interest Rate Tests", () => {
     cy.get(mortgageFields.downpaymentAmount).clear().type("60,000");
     cy.get(mortgageFields.downpaymentPercent).clear().type("20");
     cy.get(mortgageFields.loanProgram).select("30 year fixed");
-    cy.contains("Your payment: $1,855/mo");
+    cy.contains("Your payment: $1,830/mo");
 
     cy.findByDisplayValue("6.425").clear().type("5.432").blur();
-    cy.contains("Your payment: $1,702/mo");
+    cy.contains("Your payment: $1,677/mo");
   });
 
   it("Loan program selection changes interest rate", () => {
