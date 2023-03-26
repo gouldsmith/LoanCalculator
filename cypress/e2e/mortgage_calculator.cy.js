@@ -25,7 +25,7 @@ describe("Interest Rate Tests", () => {
     ).as("getRegion");
   });
 
-  it.only("Interest rate field interaction", () => {
+  it("Interest rate field interaction", () => {
     cy.wait("@get30FixedRate");
     cy.get(mortgageFields.interestRate).should("contain.value", "6.425");
 
